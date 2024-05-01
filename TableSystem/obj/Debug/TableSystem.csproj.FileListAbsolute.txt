@@ -1,0 +1,6 @@
+C:\Users\USEC\RiderProjects\TableSystem\TableSystem\bin\Debug\TableSystem.exe
+C:\Users\USEC\RiderProjects\TableSystem\TableSystem\bin\Debug\TableSystem.pdb
+C:\Users\USEC\RiderProjects\TableSystem\TableSystem\obj\Debug\TableSystem.csproj.AssemblyReference.cache
+C:\Users\USEC\RiderProjects\TableSystem\TableSystem\obj\Debug\TableSystem.csproj.CoreCompileInputs.cache
+C:\Users\USEC\RiderProjects\TableSystem\TableSystem\obj\Debug\TableSystem.exe
+C:\Users\USEC\RiderProjects\TableSystem\TableSystem\obj\Debug\TableSystem.pdb
