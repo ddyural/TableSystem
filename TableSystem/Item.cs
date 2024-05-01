@@ -32,10 +32,12 @@
             Y += deltaY;
         }
         
-        // поворот оллееееооп
+        // поворот оллееееоооооп
         public void Rotate()
         {
-            (Width, Height) = (Height, Width);
+            int temp = Width;
+            Width = Height;
+            Height = temp;
         }
         
         // создание

@@ -37,6 +37,10 @@ namespace ContainerSystem
             }
         }
 
+        /// <summary>
+        /// добавляем новый предмет
+        /// </summary>
+        /// <param name="item">сам предмет</param>
         public void AddItem(Item item)
         {
             if (item.Width <= 0 || item.Height <= 0) // чтобы предметы с 0 шириной или 0 высотой не шли
@@ -63,15 +67,7 @@ namespace ContainerSystem
                 }
                 
                 // проходимся по каждой строке, соответствующей Y Item
-                for (int i = item.Y; i < item.Y + item.Height; i++)
-                {
-                    // заполняем ячейки внутри каждой строки, соответствующие X Item.
-                    for (int j = item.X; j < item.X + item.Width; j++)
-                    {
-                        // на каждой итерации заполняем символом
-                        Grid[i, j] = item.Symbol;
-                    }
-                }
+                StickIn(item);
                 ItemsMap[item.Symbol] = item; // ключ - символ, значение - сам item
                 PrintTable();  // то же, что и Console.WriteLine(table);
             }
@@ -81,7 +77,10 @@ namespace ContainerSystem
             }
         }
 
-        private void PrintTable() // то же, что и Console.WriteLine(table);
+        /// <summary>
+        /// вывод таблицы в консоль
+        /// </summary>
+        private void PrintTable() 
         {
             // выводим номера столбцов
             Console.Write("   "); // обязательно 3 пробела, чтобы не было криво-косо
@@ -100,6 +99,153 @@ namespace ContainerSystem
                     Console.Write(Grid[i, j]);
                 }
                 Console.WriteLine();
+            }
+        }
+        
+        /// <summary>
+        /// передвижение предмета
+        /// </summary>
+        /// <param name="symbol">ну ипа уникальный айди предмета</param>
+        /// <param name="newX">новый Х</param>
+        /// <param name="newY">новый Y</param>
+        public void MoveItem(char symbol, int newX, int newY)
+        {
+            if (ItemsMap.ContainsKey(symbol))
+            {
+                Item item = ItemsMap[symbol];
+
+                // проверяем, что новые координаты не выходят за границы таблицы
+                if (newX >= 0 && newY >= 0 && newX + item.Width <= Grid.GetLength(1) && newY + item.Height <= Grid.GetLength(0))
+                {
+                    // удаляем старое положение предмета
+                    StickOut(item);
+
+                    // обновляем координаты предмета
+                    item.Move(newX, newY);
+
+                    // размещаем предмет в новом положении
+                    StickIn(item);
+                    
+                    PrintTable(); // выводим таблицу после перемещения
+                }
+                else
+                {
+                    Console.WriteLine("Новые координаты выходят за границы таблицы.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Предмет с символом " + symbol + " не найден.");
+            }
+        }
+
+        /// <summary>
+        /// удаляем предмет
+        /// </summary>
+        /// <param name="symbol">символ - по нему находим предмет</param>
+        public void RemoveItem(char symbol)
+        {
+            Console.WriteLine("Текущая таблица:");
+            if (ItemsMap.ContainsKey(symbol))
+            {
+                Item item = ItemsMap[symbol];
+
+                // удаляем предмет из таблицы
+                StickOut(item);
+
+                // удаляем предмет из словаря
+                ItemsMap.Remove(symbol);
+
+                PrintTable(); // Выводим таблицу после удаления
+            }
+            else
+            {
+                Console.WriteLine("Предмет с символом " + symbol + " не найден.");
+            }
+        }
+        
+        /// <summary>
+        /// поворот итема
+        /// </summary>
+        /// <param name="symbol">символ - по нему находим предмет</param>
+        public void RotateItem(char symbol)
+        {
+            if (ItemsMap.ContainsKey(symbol))
+            {
+                Item item = ItemsMap[symbol];
+        
+                // удалаяем предмет перед тем, как покрутить
+                StickOut(item);
+        
+                // непосредственно сам поворотик
+                item.Rotate();
+        
+                // располагаем предмет на сетке
+                StickIn(item);
+
+                Console.WriteLine("Item " + symbol + " has been rotated.");
+                PrintTable();
+            }
+            else
+            {
+                Console.WriteLine("Item with symbol " + symbol + " not found.");
+            }
+        }
+        
+        
+        
+        /// <summary>
+        /// просто снос всего
+        /// </summary>
+        public void ClearTable()
+        {
+            // проходимся по всем строкам таблицы (первое измерение массива Grid)
+            for (int i = 0; i < Grid.GetLength(0); i++)
+            {
+                // проходимся по всем столбцам таблицы (второе измерение массива Grid)
+                for (int j = 0; j < Grid.GetLength(1); j++)
+                {
+                    // в каждую ячейку - пробел
+                    Grid[i, j] = ' ';
+                }
+            }
+            ItemsMap.Clear(); // очистка словаря элементов
+            PrintTable(); // выводим таблицу после перемещения ... а показывать то нечего ))))
+        }
+
+        /// <summary>
+        /// вытаскиваем из таблицы
+        /// </summary>
+        /// <param name="item">наш айтем</param>
+        public void StickOut(Item item)
+        {
+            // проходимся по каждой строке, соответствующей Y Item
+            for (int i = item.Y; i < item.Y + item.Height; i++)
+            {
+                // заполняем ячейки внутри каждой строки, соответствующие X Item.
+                for (int j = item.X; j < item.X + item.Width; j++)
+                {
+                    // на каждой итерации заполняем пустотой ( а можем и смимволом )
+                    Grid[i, j] = ' '; // = item.Symbol // = ' ';
+                }
+            }
+        }
+
+        /// <summary>
+        /// засовываем в таблицу
+        /// </summary>
+        /// <param name="item">наш айтем, который решили взять</param>
+        public void StickIn(Item item)
+        {
+            // проходимся по каждой строке, соответствующей Y Item
+            for (int i = item.Y; i < item.Y + item.Height; i++)
+            {
+                // заполняем ячейки внутри каждой строки, соответствующие X Item.
+                for (int j = item.X; j < item.X + item.Width; j++)
+                {
+                    // на каждой итерации заполняем символом
+                    Grid[i, j] = item.Symbol;
+                }
             }
         }
     }
