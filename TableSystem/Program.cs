@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ContainerSystem
 {
@@ -24,6 +25,7 @@ namespace ContainerSystem
                 Console.WriteLine("3. Удалить предмет");
                 Console.WriteLine("4. Повернуть предмет");
                 Console.WriteLine("5. Удалить всё вообще");
+                Console.WriteLine("6. Переделать в список");
                 Console.Write("Введите номер действия: ");
                 string choice = Console.ReadLine();
 
@@ -133,7 +135,28 @@ namespace ContainerSystem
                     }
                     case "5":
                     {
-                        table.ClearTable();
+                        table.ClearTable(); // отвал башки
+                        break;
+                    }
+                    case "6":
+                    {
+                        //  странно очень выглядит
+                        
+                        List<(char, int, int, int, int)> itemInfoList = new List<(char, int, int, int, int)>();
+                        
+                        foreach (var kvp in table.ItemsMap)
+                        {
+                            Item item = kvp.Value;
+                            itemInfoList.Add((item.Symbol, item.X, item.Y, item.Width, item.Height));
+                        }
+
+                        Console.WriteLine("Список всех имеющихся предметов:");
+                        
+                        foreach (var itemInfo in itemInfoList)
+                        {
+                            Console.WriteLine($"Символ: {itemInfo.Item1}, X: {itemInfo.Item2}, Y: {itemInfo.Item3}, Ширина: {itemInfo.Item4}, Высота: {itemInfo.Item5}");
+                        }
+                        
                         break;
                     }
                     
