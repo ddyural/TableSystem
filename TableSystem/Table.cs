@@ -130,12 +130,12 @@ namespace ContainerSystem
                 }
                 else
                 {
-                    Console.WriteLine("Новые координаты выходят за границы таблицы.");
+                    Console.WriteLine("Новые координаты выходят за границы таблицы");
                 }
             }
             else
             {
-                Console.WriteLine("Предмет с символом " + symbol + " не найден.");
+                Console.WriteLine("Предмет с символом " + symbol + " не найден");
             }
         }
 
@@ -160,7 +160,7 @@ namespace ContainerSystem
             }
             else
             {
-                Console.WriteLine("Предмет с символом " + symbol + " не найден.");
+                Console.WriteLine("Предмет с символом " + symbol + " не найден");
             }
         }
         
@@ -183,16 +183,40 @@ namespace ContainerSystem
                 // располагаем предмет на сетке
                 StickIn(item);
 
-                Console.WriteLine("Item " + symbol + " has been rotated.");
+                Console.WriteLine("Итем " + symbol + " был повёрнут");
                 PrintTable();
             }
             else
             {
-                Console.WriteLine("Item with symbol " + symbol + " not found.");
+                Console.WriteLine("Итем " + symbol + " не был найден");
             }
         }
         
-        
+        /// <summary>
+        /// переразмер объекта
+        /// </summary>
+        /// <param name="symbol">id уникальный</param>
+        /// <param name="newWidth">новая ширина</param>
+        /// <param name="newHeight">новая высота</param>
+        public void ResizeItem(char symbol, int newWidth, int newHeight)
+        {
+            if (ItemsMap.ContainsKey(symbol))
+            {
+                Item item = ItemsMap[symbol];
+                
+                StickOut(item);
+                
+                item.Resize(newWidth, newHeight);
+                
+                StickIn(item);
+
+                PrintTable();
+            }
+            else
+            {
+                Console.WriteLine("Предмет с символом " + symbol + " не найден");
+            }
+        }
         
         /// <summary>
         /// просто снос всего

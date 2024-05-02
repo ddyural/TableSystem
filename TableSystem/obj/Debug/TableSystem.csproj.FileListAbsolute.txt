@@ -4,3 +4,9 @@ C:\Users\USEC\RiderProjects\TableSystem\TableSystem\obj\Debug\TableSystem.csproj
 C:\Users\USEC\RiderProjects\TableSystem\TableSystem\obj\Debug\TableSystem.csproj.CoreCompileInputs.cache
 C:\Users\USEC\RiderProjects\TableSystem\TableSystem\obj\Debug\TableSystem.exe
 C:\Users\USEC\RiderProjects\TableSystem\TableSystem\obj\Debug\TableSystem.pdb
+C:\Users\USEC\Documents\GitHub\TableSystem\TableSystem\bin\Debug\TableSystem.exe
+C:\Users\USEC\Documents\GitHub\TableSystem\TableSystem\bin\Debug\TableSystem.pdb
+C:\Users\USEC\Documents\GitHub\TableSystem\TableSystem\obj\Debug\TableSystem.csproj.AssemblyReference.cache
+C:\Users\USEC\Documents\GitHub\TableSystem\TableSystem\obj\Debug\TableSystem.csproj.CoreCompileInputs.cache
+C:\Users\USEC\Documents\GitHub\TableSystem\TableSystem\obj\Debug\TableSystem.exe
+C:\Users\USEC\Documents\GitHub\TableSystem\TableSystem\obj\Debug\TableSystem.pdb

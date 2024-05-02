@@ -26,7 +26,7 @@ namespace ContainerSystem
                 Console.WriteLine("4. Повернуть предмет");
                 Console.WriteLine("5. Удалить всё вообще");
                 Console.WriteLine("6. Переделать в список");
-                Console.Write("Введите номер действия: ");
+                Console.WriteLine("7. Изменить размер объекта");
                 string choice = Console.ReadLine();
 
                 switch (choice)
@@ -76,7 +76,7 @@ namespace ContainerSystem
                             }
                             else
                             {
-                                Console.WriteLine("Предмет с таким символом не найден.");
+                                Console.WriteLine("Предмет с таким символом не найден");
                             }
                         }
                         catch (FormatException e)
@@ -99,7 +99,7 @@ namespace ContainerSystem
                             }
                             else
                             {
-                                Console.WriteLine("Предмет с таким символом не найден.");
+                                Console.WriteLine("Предмет с таким символом не найден");
                             }
                         }
                         catch (FormatException e)
@@ -122,7 +122,7 @@ namespace ContainerSystem
                             }
                             else
                             {
-                                Console.WriteLine("Предмет с таким символом не найден.");
+                                Console.WriteLine("Предмет с таким символом не найден");
                             }
                         }
                         catch (FormatException e)
@@ -159,10 +159,37 @@ namespace ContainerSystem
                         
                         break;
                     }
+                    case "7":
+                    {
+                        Console.WriteLine("Введите id предмета для изменения размера:");
+                        try
+                        {
+                            char resizeSymbol = char.Parse(Console.ReadLine());
+
+                            if (table.ItemsMap.ContainsKey(resizeSymbol))
+                            {
+                                Console.WriteLine("Введите новую ширину и новую высоту:");
+                                string[] newSizeStr = Console.ReadLine().Split(',');
+                                int newWidth = int.Parse(newSizeStr[0]);
+                                int newHeight = int.Parse(newSizeStr[1]);
+
+                                table.ResizeItem(resizeSymbol, newWidth, newHeight);
+                            }
+                            else
+                            {
+                                Console.WriteLine("Предмет с таким символом не найден");
+                            }
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e);
+                        }
+                        break;
+                    }
                     
                     default:
                     {
-                        Console.WriteLine("Некорректный выбор. Попробуйте еще раз.");
+                        Console.WriteLine("Некорректный выбор. Попробуйте ещё раз");
                         break;
                     }
                 }

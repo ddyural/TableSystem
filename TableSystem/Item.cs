@@ -40,6 +40,13 @@
             Height = temp;
         }
         
+        // переразмер
+        public void Resize(int newWidth, int newHeight)
+        {
+            Width = newWidth;
+            Height = newHeight;
+        }
+        
         // создание
         // Item item = new Item(symbol, x, y, itemWidth, itemHeight);
     }
