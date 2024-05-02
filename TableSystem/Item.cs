@@ -35,9 +35,7 @@
         // поворот оллееееоооооп
         public void Rotate()
         {
-            int temp = Width;
-            Width = Height;
-            Height = temp;
+            (Width, Height) = (Height, Width);
         }
         
         // переразмер
